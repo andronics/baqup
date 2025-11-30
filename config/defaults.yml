@@ -1,0 +1,36 @@
+# baqup controller defaults
+
+defaults:
+  schedules:
+    daily:
+      cron: "0 3 * * *"
+      retention: 7
+    hourly:
+      cron: "0 * * * *"
+      retention: 24
+    weekly:
+      cron: "0 4 * * 0"
+      retention: 4
+
+  target:
+    schedule: daily
+    compress: true
+
+staging:
+  path: /var/lib/baqup/staging
+  cleanup_after_upload: true
+
+upload:
+  backend: rclone
+  remote: "gdrive:backups"
+
+notifications:
+  on_failure:
+    - ntfy://ntfy.sh/my-alerts
+  on_success: false
+
+logging:
+  level: info
+  format: json
+
+poll_interval: 60
